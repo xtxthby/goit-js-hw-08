@@ -1,10 +1,10 @@
 import throttle from 'lodash.throttle';
 
 const LOCAL_KEY = 'feedback-form-state';
-// ключ для сховища ми парсимо
+// ключ для сховища ми парсимо i записуємо в formData
 let formData = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
 
-form = document.querySelector('.feedback-form');
+const form = document.querySelector('.feedback-form');
 form.addEventListener('input', throttle(storageFormData, 500));
 form.addEventListener('submit', onFormSubmit);
 reloadPage();
@@ -12,7 +12,7 @@ reloadPage();
 function storageFormData(e) {
     // якщо нема то запише, якщо є перезапише
     formData[e.target.name] = e.target.value;
-    // записує по ключу в localStorage і перетвореному значенню
+    // записує по ключу в localStorage і перетвореному значенню в одном обєкті
     localStorage.setItem(LOCAL_KEY, JSON.stringify(formData));
 }
 
